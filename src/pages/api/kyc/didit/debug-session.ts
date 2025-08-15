@@ -1,5 +1,5 @@
 /**
- * 🔍 Debug Didit Session Creation
+ * DEBUG Didit Session Creation
  * Advanced debugging for Didit API integration
  */
 
@@ -14,11 +14,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const workflowId = process.env.DIDIT_WORKFLOW_ID
   const webhookSecret = process.env.DIDIT_WEBHOOK_SECRET
 
-  console.log('🔍 Starting Didit API debug...')
+  console.log('DEBUG: Starting Didit API debug...')
   
   // Test 1: Basic API key validation
   try {
-    console.log('🧪 Test 1: Testing API key validation...')
+    console.log('TEST 1: Testing API key validation...')
     const authTest = await fetch('https://verification.didit.me/v2/session/', {
       method: 'GET',
       headers: {
@@ -75,7 +75,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   for (const testCase of testCases) {
     try {
-      console.log(`🧪 Testing: ${testCase.name}`)
+      console.log(`TESTING: ${testCase.name}`)
       console.log('Payload:', JSON.stringify(testCase.payload, null, 2))
 
       const response = await fetch('https://verification.didit.me/v2/session/', {

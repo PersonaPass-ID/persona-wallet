@@ -12,26 +12,7 @@ import FlexibleTokenPurchase from '@/components/FlexibleTokenPurchase'
 import KYCVerificationFlow from '@/components/KYCVerificationFlow'
 import ZKProofModal from '@/components/ZKProofModal'
 import VerifiableCredentialCard from '@/components/VerifiableCredentialCard'
-import {
-  Shield,
-  User,
-  Wallet,
-  Plus,
-  ExternalLink,
-  Settings,
-  LogOut,
-  CheckCircle,
-  AlertCircle,
-  Clock,
-  Zap,
-  Award,
-  Globe,
-  Lock,
-  TrendingUp,
-  Eye,
-  Copy,
-  Loader2
-} from 'lucide-react'
+// Removed all icon imports - using text-based UI only
 
 export default function DashboardPage() {
   const router = useRouter()
@@ -203,7 +184,7 @@ export default function DashboardPage() {
     return (
       <div className="min-h-screen bg-gray-900 flex items-center justify-center">
         <div className="text-center">
-          <Loader2 className="w-12 h-12 animate-spin text-purple-500 mx-auto mb-4" />
+          <div className="w-12 h-12 border-4 border-purple-500/30 border-t-purple-500 rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-gray-400 text-lg">Loading your identity dashboard...</p>
         </div>
       </div>
@@ -226,8 +207,8 @@ export default function DashboardPage() {
           <div className="flex justify-between items-center">
             {/* Logo & Title */}
             <div className="flex items-center space-x-4">
-              <div className="w-10 h-10 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg flex items-center justify-center">
-                <Shield className="w-6 h-6 text-white" />
+              <div className="px-3 py-1 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg">
+                <span className="text-white font-bold text-sm">SECURE</span>
               </div>
               <div>
                 <h1 className="text-xl font-bold text-white">PersonaPass</h1>
@@ -240,22 +221,22 @@ export default function DashboardPage() {
               {/* ID Balance */}
               <div className="bg-purple-600/20 border border-purple-500/30 rounded-lg px-4 py-2">
                 <div className="flex items-center space-x-2">
-                  <Zap className="w-4 h-4 text-purple-400" />
+                  <span className="text-purple-400 font-bold text-xs">ID</span>
                   <span className="text-purple-300 font-medium">{idBalance}</span>
                 </div>
               </div>
 
               {/* DID Display */}
               <div className="hidden lg:flex items-center space-x-2 bg-gray-700/50 rounded-lg px-3 py-2">
-                <User className="w-4 h-4 text-gray-400" />
+                <span className="text-gray-400 font-bold text-xs">DID</span>
                 <span className="text-sm text-gray-300 font-mono">
                   {userDID.length > 30 ? `${userDID.slice(0, 20)}...${userDID.slice(-8)}` : userDID}
                 </span>
                 <button
                   onClick={copyDID}
-                  className="text-gray-400 hover:text-white transition-colors"
+                  className="text-gray-400 hover:text-white transition-colors px-2 py-1 text-xs font-medium"
                 >
-                  {showDIDCopy ? <CheckCircle className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
+                  {showDIDCopy ? 'COPIED' : 'COPY'}
                 </button>
               </div>
 
@@ -263,17 +244,16 @@ export default function DashboardPage() {
               <div className="flex items-center space-x-2">
                 <button
                   onClick={() => setActiveTab('purchase')}
-                  className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2 rounded-lg hover:from-purple-700 hover:to-indigo-700 transition-all duration-200 flex items-center space-x-2"
+                  className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2 rounded-lg hover:from-purple-700 hover:to-indigo-700 transition-all duration-200"
                 >
-                  <Plus className="w-4 h-4" />
                   <span>Buy Tokens</span>
                 </button>
                 
                 <button
                   onClick={handleSignOut}
-                  className="text-gray-400 hover:text-white p-2 rounded-lg hover:bg-gray-700/50 transition-all duration-200"
+                  className="text-gray-400 hover:text-white px-3 py-2 rounded-lg hover:bg-gray-700/50 transition-all duration-200 text-sm font-medium"
                 >
-                  <LogOut className="w-5 h-5" />
+                  SIGN OUT
                 </button>
               </div>
             </div>
@@ -324,8 +304,8 @@ export default function DashboardPage() {
                     <p className="text-gray-400 text-sm">Trust Score</p>
                     <p className="text-3xl font-bold text-white">{trustScore}/100</p>
                   </div>
-                  <div className="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center">
-                    <TrendingUp className="w-6 h-6 text-green-400" />
+                  <div className="px-3 py-2 bg-green-500/20 rounded-lg">
+                    <span className="text-green-400 font-bold text-xs">ACTIVE</span>
                   </div>
                 </div>
                 <div className="mt-4">
@@ -341,8 +321,8 @@ export default function DashboardPage() {
                     <p className="text-gray-400 text-sm">Verified Credentials</p>
                     <p className="text-3xl font-bold text-white">{verifiedCredentials}</p>
                   </div>
-                  <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center">
-                    <Award className="w-6 h-6 text-purple-400" />
+                  <div className="px-3 py-2 bg-purple-500/20 rounded-lg">
+                    <span className="text-purple-400 font-bold text-xs">VERIFIED</span>
                   </div>
                 </div>
                 <p className="text-gray-500 text-sm mt-2">Active credentials</p>
@@ -354,8 +334,8 @@ export default function DashboardPage() {
                     <p className="text-gray-400 text-sm">ID Token Balance</p>
                     <p className="text-3xl font-bold text-white">{idBalance.replace(' ID', '')}</p>
                   </div>
-                  <div className="w-12 h-12 bg-yellow-500/20 rounded-lg flex items-center justify-center">
-                    <Zap className="w-6 h-6 text-yellow-400" />
+                  <div className="px-3 py-2 bg-yellow-500/20 rounded-lg">
+                    <span className="text-yellow-400 font-bold text-xs">POWER</span>
                   </div>
                 </div>
                 <p className="text-gray-500 text-sm mt-2">Available tokens</p>
@@ -369,8 +349,8 @@ export default function DashboardPage() {
                       {networkStatus?.online ? 'Online' : 'Offline'}
                     </p>
                   </div>
-                  <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center">
-                    <Globe className="w-6 h-6 text-blue-400" />
+                  <div className="px-3 py-2 bg-blue-500/20 rounded-lg">
+                    <span className="text-blue-400 font-bold text-xs">GLOBAL</span>
                   </div>
                 </div>
                 {networkStatus?.blockHeight && (
@@ -385,29 +365,35 @@ export default function DashboardPage() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <button
                   onClick={() => setActiveTab('identity')}
-                  className="p-4 bg-gradient-to-r from-purple-600/20 to-indigo-600/20 border border-purple-500/30 rounded-lg hover:from-purple-600/30 hover:to-indigo-600/30 transition-all duration-200 text-left"
+                  className="p-6 bg-gradient-to-r from-purple-600/20 to-indigo-600/20 border border-purple-500/30 rounded-lg hover:from-purple-600/30 hover:to-indigo-600/30 transition-all duration-200 text-left"
                 >
-                  <Shield className="w-8 h-8 text-purple-400 mb-2" />
-                  <h4 className="font-medium text-white">Verify Identity</h4>
-                  <p className="text-sm text-gray-400">Complete identity verification</p>
+                  <div className="inline-block px-3 py-1 bg-purple-500/30 text-purple-300 font-bold text-xs rounded mb-3">
+                    IDENTITY
+                  </div>
+                  <h4 className="font-medium text-white text-lg mb-2">Verify Identity</h4>
+                  <p className="text-sm text-gray-400">Complete identity verification process</p>
                 </button>
 
                 <button
                   onClick={() => router.push('/credentials')}
-                  className="p-4 bg-gradient-to-r from-green-600/20 to-emerald-600/20 border border-green-500/30 rounded-lg hover:from-green-600/30 hover:to-emerald-600/30 transition-all duration-200 text-left"
+                  className="p-6 bg-gradient-to-r from-green-600/20 to-emerald-600/20 border border-green-500/30 rounded-lg hover:from-green-600/30 hover:to-emerald-600/30 transition-all duration-200 text-left"
                 >
-                  <Award className="w-8 h-8 text-green-400 mb-2" />
-                  <h4 className="font-medium text-white">Universal Passport</h4>
-                  <p className="text-sm text-gray-400">Manage your credentials</p>
+                  <div className="inline-block px-3 py-1 bg-green-500/30 text-green-300 font-bold text-xs rounded mb-3">
+                    PASSPORT
+                  </div>
+                  <h4 className="font-medium text-white text-lg mb-2">Universal Passport</h4>
+                  <p className="text-sm text-gray-400">Manage your digital credentials</p>
                 </button>
 
                 <button
                   onClick={() => setActiveTab('purchase')}
-                  className="p-4 bg-gradient-to-r from-yellow-600/20 to-orange-600/20 border border-yellow-500/30 rounded-lg hover:from-yellow-600/30 hover:to-orange-600/30 transition-all duration-200 text-left"
+                  className="p-6 bg-gradient-to-r from-yellow-600/20 to-orange-600/20 border border-yellow-500/30 rounded-lg hover:from-yellow-600/30 hover:to-orange-600/30 transition-all duration-200 text-left"
                 >
-                  <Wallet className="w-8 h-8 text-yellow-400 mb-2" />
-                  <h4 className="font-medium text-white">Buy ID Tokens</h4>
-                  <p className="text-sm text-gray-400">Purchase additional tokens</p>
+                  <div className="inline-block px-3 py-1 bg-yellow-500/30 text-yellow-300 font-bold text-xs rounded mb-3">
+                    TOKENS
+                  </div>
+                  <h4 className="font-medium text-white text-lg mb-2">Buy ID Tokens</h4>
+                  <p className="text-sm text-gray-400">Purchase additional ID tokens</p>
                 </button>
               </div>
             </div>
@@ -421,8 +407,8 @@ export default function DashboardPage() {
             <div className="bg-gradient-to-br from-gray-800/50 to-gray-700/30 rounded-xl p-8 border border-gray-600/30">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center space-x-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-2xl flex items-center justify-center">
-                    <Shield className="w-8 h-8 text-white" />
+                  <div className="px-4 py-3 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-2xl">
+                    <span className="text-white font-black text-sm">SECURE</span>
                   </div>
                   <div>
                     <h2 className="text-2xl font-bold text-white mb-1">Identity Verification</h2>
@@ -495,9 +481,8 @@ export default function DashboardPage() {
                 </div>
                 <button
                   onClick={() => router.push('/credentials')}
-                  className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-6 py-3 rounded-xl hover:from-purple-700 hover:to-indigo-700 transition-all duration-200 flex items-center space-x-2 shadow-lg"
+                  className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-6 py-3 rounded-xl hover:from-purple-700 hover:to-indigo-700 transition-all duration-200 shadow-lg"
                 >
-                  <ExternalLink className="w-4 h-4" />
                   <span>Universal Passport</span>
                 </button>
               </div>
@@ -525,8 +510,8 @@ export default function DashboardPage() {
 
             {credentials.length === 0 ? (
               <div className="bg-gradient-to-br from-gray-800/30 to-gray-700/20 rounded-2xl p-12 border border-gray-600/30 text-center">
-                <div className="w-24 h-24 bg-gradient-to-br from-purple-600/20 to-indigo-600/20 rounded-2xl mx-auto mb-6 flex items-center justify-center">
-                  <Award className="w-12 h-12 text-purple-400" />
+                <div className="px-8 py-4 bg-gradient-to-br from-purple-600/20 to-indigo-600/20 rounded-2xl mx-auto mb-6 inline-block">
+                  <span className="text-purple-400 font-black text-lg">CREDENTIALS</span>
                 </div>
                 <h3 className="text-2xl font-semibold text-white mb-3">Build Your Identity Portfolio</h3>
                 <p className="text-gray-400 mb-8 max-w-md mx-auto">
@@ -559,8 +544,8 @@ export default function DashboardPage() {
             {/* Purchase Header */}
             <div className="bg-gradient-to-r from-yellow-900/20 to-orange-900/20 border border-yellow-500/20 rounded-xl p-6">
               <div className="flex items-center space-x-4 mb-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-xl flex items-center justify-center">
-                  <Wallet className="w-6 h-6 text-white" />
+                <div className="px-4 py-2 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-xl">
+                  <span className="text-white font-black text-sm">WALLET</span>
                 </div>
                 <div>
                   <h2 className="text-2xl font-bold text-white mb-1">Buy ID Tokens</h2>
@@ -570,7 +555,7 @@ export default function DashboardPage() {
               
               <div className="bg-yellow-500/10 rounded-lg p-4">
                 <div className="flex items-center space-x-2 mb-2">
-                  <Zap className="w-4 h-4 text-yellow-400" />
+                  <span className="text-yellow-400 font-bold text-xs">BALANCE</span>
                   <span className="text-yellow-400 font-medium">Current Balance: {idBalance}</span>
                 </div>
                 <p className="text-gray-300 text-sm">Use tokens to generate zero-knowledge proofs and access Web3 services</p>

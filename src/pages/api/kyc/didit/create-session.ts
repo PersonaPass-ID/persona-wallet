@@ -1,5 +1,5 @@
 /**
- * 🆓 Didit KYC Session Creation API
+ * FREE Didit KYC Session Creation API
  * Creates FREE verification sessions using Didit.me API
  * Based on Didit documentation: POST https://verification.didit.me/v2/session/
  */
@@ -41,7 +41,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const apiEndpoint = 'https://verification.didit.me/v2/session/'
   const webhookUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/api/kyc/didit/webhook`
   
-  console.log('🔧 DIDIT Configuration:', {
+  console.log('CONFIG: DIDIT Configuration:', {
     hasApiKey: !!apiKey,
     hasWorkflowId: !!workflowId,
     hasWebhookSecret: !!webhookSecret,
@@ -83,7 +83,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       })
     }
 
-    console.log('🚀 Creating FREE Didit verification session for:', user_address)
+    console.log('CREATING: FREE Didit verification session for:', user_address)
 
     // Use simple API key authentication as per DIDIT documentation
     // DIDIT uses straightforward API key auth for session creation, not OAuth
@@ -98,11 +98,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       metadata: metadata || {} // Optional metadata
     }
 
-    console.log('📤 Sending session creation request to Didit API')
-    console.log('🌐 API Endpoint:', apiEndpoint)
-    console.log('📋 Request payload:', JSON.stringify(sessionRequest, null, 2))
-    console.log('🔗 Webhook URL:', sessionRequest.callback)
-    console.log('🔐 Using DIDIT API key authentication (x-api-key header)')
+    console.log('SENDING: Session creation request to Didit API')
+    console.log('ENDPOINT:', apiEndpoint)
+    console.log('PAYLOAD:', JSON.stringify(sessionRequest, null, 2))
+    console.log('WEBHOOK:', sessionRequest.callback)
+    console.log('AUTH: Using DIDIT API key authentication (x-api-key header)')
 
     // Call Didit API to create session with proper headers
     // IMPORTANT: DIDIT v2 uses 'x-api-key' header, not 'Authorization: Bearer'
@@ -118,11 +118,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     })
 
     const responseText = await diditResponse.text()
-    console.log('📥 Raw Didit API response:', diditResponse.status, responseText)
+    console.log('RESPONSE: Raw Didit API response:', diditResponse.status, responseText)
 
     if (!diditResponse.ok) {
-      console.error('❌ Didit API error:', diditResponse.status, responseText)
-      console.error('🔍 Debug info:', {
+      console.error('ERROR: Didit API error:', diditResponse.status, responseText)
+      console.error('DEBUG: Debug info:', {
         apiKey: apiKey?.substring(0, 10) + '...',
         workflowId: workflowId,
         endpoint: apiEndpoint,
@@ -168,7 +168,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
       sessionData = JSON.parse(responseText)
     } catch (parseError) {
-      console.error('❌ Failed to parse Didit response:', parseError)
+      console.error('ERROR: Failed to parse Didit response:', parseError)
       return res.status(500).json({
         success: false,
         error: 'Invalid response from Didit API',
@@ -176,13 +176,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       })
     }
 
-    console.log('✅ Didit session created successfully!')
+    console.log('SUCCESS: Didit session created successfully!')
     console.log('Session data:', sessionData)
 
     // Return success response
     res.status(200).json({
       success: true,
-      message: '🎉 FREE verification session created successfully!',
+      message: 'SUCCESS: FREE verification session created successfully!',
       session_data: sessionData,
       cost_info: {
         cost: 0,
@@ -200,7 +200,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     })
 
   } catch (error: any) {
-    console.error('❌ Session creation error:', error)
+    console.error('ERROR: Session creation error:', error)
     
     res.status(500).json({
       success: false,

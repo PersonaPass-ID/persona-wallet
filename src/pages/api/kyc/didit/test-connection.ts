@@ -20,7 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    console.log('🔍 Testing Didit API connection...')
+    console.log('TESTING: Didit API connection...')
     
     // Test 1: Check API key validity by trying to access account/workflows
     const workflowsResponse = await fetch('https://verification.didit.me/v2/workflows', {
@@ -33,7 +33,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     if (!workflowsResponse.ok) {
       const errorData = await workflowsResponse.text()
-      console.error('❌ Workflows API failed:', workflowsResponse.status, errorData)
+      console.error('ERROR: Workflows API failed:', workflowsResponse.status, errorData)
       
       return res.status(500).json({
         success: false,
@@ -48,8 +48,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     const workflowsData = await workflowsResponse.json()
-    console.log('✅ Successfully connected to Didit API')
-    console.log('📋 Available workflows:', workflowsData)
+    console.log('SUCCESS: Connected to Didit API')
+    console.log('WORKFLOWS: Available workflows:', workflowsData)
 
     // Test 2: Try alternative endpoints if workflows endpoint doesn't exist
     let accountInfo = null
@@ -66,12 +66,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         accountInfo = await accountResponse.json()
       }
     } catch (accountError) {
-      console.log('ℹ️ Account endpoint not available (this is normal)')
+      console.log('INFO: Account endpoint not available (this is normal)')
     }
 
     res.status(200).json({
       success: true,
-      message: '✅ Didit API connection successful!',
+      message: 'SUCCESS: Didit API connection successful!',
       api_key_status: 'Valid',
       webhook_secret_configured: !!webhookSecret,
       workflows: workflowsData,
@@ -83,14 +83,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         '4. Configure webhook URL in Didit dashboard: https://personapass.xyz/api/kyc/didit/webhook'
       ],
       integration_status: {
-        api_credentials: '✅ Valid',
-        webhook_secret: webhookSecret ? '✅ Configured' : '⚠️ Missing',
-        workflow_id: process.env.DIDIT_WORKFLOW_ID ? '✅ Configured' : '⚠️ Needs to be set'
+        api_credentials: 'VALID',
+        webhook_secret: webhookSecret ? 'CONFIGURED' : 'MISSING',
+        workflow_id: process.env.DIDIT_WORKFLOW_ID ? 'CONFIGURED' : 'NEEDS_SETUP'
       }
     })
 
   } catch (error: any) {
-    console.error('❌ Didit API test failed:', error)
+    console.error('ERROR: Didit API test failed:', error)
     
     res.status(500).json({
       success: false,

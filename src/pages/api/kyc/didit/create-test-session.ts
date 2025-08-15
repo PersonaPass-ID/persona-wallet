@@ -26,7 +26,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    console.log('🧪 Creating test Didit session...')
+    console.log('TESTING: Creating test Didit session...')
 
     // Test session with sample data
     const requestBody = {
@@ -46,7 +46,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
     }
 
-    console.log('📤 Sending request to Didit:', JSON.stringify(requestBody, null, 2))
+    console.log('SENDING: Request to Didit:', JSON.stringify(requestBody, null, 2))
 
     const response = await fetch('https://verification.didit.me/v2/session', {
       method: 'POST',
@@ -58,7 +58,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     })
 
     const responseText = await response.text()
-    console.log('📥 Raw response:', response.status, responseText)
+    console.log('RESPONSE: Raw response:', response.status, responseText)
 
     if (!response.ok) {
       return res.status(response.status).json({
@@ -83,12 +83,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       data = { raw_response: responseText }
     }
 
-    console.log('✅ Test session created successfully!')
+    console.log('SUCCESS: Test session created successfully!')
     console.log('Session data:', data)
 
     res.status(200).json({
       success: true,
-      message: '🎉 Test session created successfully!',
+      message: 'SUCCESS: Test session created successfully!',
       session_data: data,
       next_steps: [
         '1. Save the session_url and test it in browser',
@@ -101,7 +101,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     })
 
   } catch (error: any) {
-    console.error('❌ Test session creation failed:', error)
+    console.error('ERROR: Test session creation failed:', error)
     
     res.status(500).json({
       success: false,

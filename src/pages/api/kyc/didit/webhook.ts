@@ -1,5 +1,5 @@
 /**
- * 🔔 DIDIT KYC Webhook Handler
+ * DIDIT KYC Webhook Handler
  * Processes verification completions and generates multiple purpose-bound VCs
  * Creates a universal Web3 identity passport from KYC results
  */
@@ -21,8 +21,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                      req.headers['signature'] as string
     const webhookSecret = process.env.DIDIT_WEBHOOK_SECRET || ''
     
-    console.log('📨 DIDIT webhook received with headers:', Object.keys(req.headers))
-    console.log('📦 Webhook body:', JSON.stringify(req.body, null, 2))
+    console.log('WEBHOOK: DIDIT webhook received with headers:', Object.keys(req.headers))
+    console.log('PAYLOAD: Webhook body:', JSON.stringify(req.body, null, 2))
     
     // Signature verification (optional in development)
     if (webhookSecret && signature) {
@@ -42,9 +42,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       )
       
       if (!isValidSignature) {
-        console.warn('⚠️ Webhook signature verification failed (continuing anyway)')
+        console.warn('WARNING: Webhook signature verification failed (continuing anyway)')
       } else {
-        console.log('✅ Webhook signature verified')
+        console.log('VERIFIED: Webhook signature verified')
       }
     }
 
@@ -65,7 +65,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                          webhookData.reference_id || 
                          webhookData.metadata?.wallet_address
     
-    console.log(`🔄 Processing DIDIT webhook:`)
+    console.log(`PROCESSING: DIDIT webhook:`)
     console.log(`  Session ID: ${sessionId}`)
     console.log(`  Status: ${status}`)
     console.log(`  Wallet: ${walletAddress}`)
@@ -76,7 +76,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       case 'passed':
       case 'approved':
       case 'success':
-        console.log(`✅ KYC verification completed successfully!`)
+        console.log(`SUCCESS: KYC verification completed successfully!`)
         
         // Build KYC result from DIDIT's response
         // DIDIT provides: ID Verification, NFC Verification, Liveness, Face Matching
@@ -124,7 +124,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         }
         
         // Generate multiple purpose-bound VCs
-        console.log('🏛️ Generating Verifiable Credentials from KYC data...')
+        console.log('GENERATING: Verifiable Credentials from KYC data...')
         const vcResult = await diditVCGenerator.generateVCsFromKYC(
           kycResult,
           walletAddress,
@@ -132,17 +132,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         )
         
         if (vcResult.success) {
-          console.log(`🎉 Successfully generated ${vcResult.summary.total_generated} VCs:`)
+          console.log(`SUCCESS: Generated ${vcResult.summary.total_generated} VCs:`)
           console.log(`  Types: ${vcResult.summary.types.join(', ')}`)
           console.log(`  DID: ${vcResult.summary.did}`)
           
           // Award 100 ID tokens for successful verification
-          console.log('💰 Awarding 100 ID tokens for successful KYC verification')
+          console.log('TOKENS: Awarding 100 ID tokens for successful KYC verification')
           
           // TODO: Call PersonaID token service to award tokens
           // await personaIDToken.award(walletAddress, 100, 'kyc_verification')
         } else {
-          console.error('❌ Failed to generate VCs:', vcResult.errors)
+          console.error('ERROR: Failed to generate VCs:', vcResult.errors)
         }
         
         break
@@ -151,7 +151,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       case 'rejected':
       case 'declined':
       case 'error':
-        console.log(`❌ KYC verification failed for session: ${sessionId}`)
+        console.log(`FAILED: KYC verification failed for session: ${sessionId}`)
         console.log(`  Reason: ${webhookData.reason || webhookData.error || 'Unknown'}`)
         
         // TODO: Store failure reason for user feedback
@@ -161,12 +161,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       case 'processing':
       case 'pending':
       case 'in_progress':
-        console.log(`⏳ KYC verification still in progress for session: ${sessionId}`)
+        console.log(`PENDING: KYC verification still in progress for session: ${sessionId}`)
         // No action needed, wait for completion webhook
         break
         
       default:
-        console.log(`📝 Unknown KYC status: ${status} for session: ${sessionId}`)
+        console.log(`UNKNOWN: KYC status: ${status} for session: ${sessionId}`)
         console.log('  Full webhook data:', JSON.stringify(webhookData, null, 2))
     }
 
@@ -181,7 +181,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     })
 
   } catch (error: any) {
-    console.error('❌ DIDIT webhook processing error:', error)
+    console.error('ERROR: DIDIT webhook processing error:', error)
     console.error('Stack trace:', error.stack)
     
     // Return 200 to prevent webhook retries even on error

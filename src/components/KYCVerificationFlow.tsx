@@ -1,5 +1,5 @@
 /**
- * 🆓 FREE KYC Verification Flow - Didit Integration
+ * FREE KYC Verification Flow - Didit Integration
  * Unlimited FREE identity verification with zero monthly costs
  */
 
@@ -257,7 +257,7 @@ const KYCVerificationFlow: React.FC<KYCVerificationFlowProps> = ({
           >
             {/* Hero Section */}
             <div className="w-20 h-20 bg-gradient-to-r from-green-500 to-blue-500 rounded-full mx-auto mb-6 flex items-center justify-center">
-              <span className="text-3xl">🆓</span>
+              <span className="text-3xl font-bold text-white">FREE</span>
             </div>
             
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
@@ -272,24 +272,24 @@ const KYCVerificationFlow: React.FC<KYCVerificationFlowProps> = ({
             {/* Benefits */}
             <div className="bg-green-50 dark:bg-green-900/20 rounded-xl p-6 mb-8 border border-green-200 dark:border-green-700">
               <h3 className="font-semibold text-gray-800 dark:text-gray-200 mb-4 flex items-center justify-center">
-                <span className="text-lg mr-2">🎁</span>
+                <span className="text-lg mr-2 font-bold">REWARDS:</span>
                 What You Get (100% FREE)
               </h3>
               <div className="space-y-2 text-sm">
                 <div className="flex items-center text-black dark:text-white">
-                  <span className="mr-2">✅</span>
+                  <span className="mr-2 text-green-600">✓</span>
                   100 ID tokens immediately
                 </div>
                 <div className="flex items-center text-black dark:text-white">
-                  <span className="mr-2">✅</span>
+                  <span className="mr-2 text-green-600">✓</span>
                   100 free tokens every month
                 </div>
                 <div className="flex items-center text-black dark:text-white">
-                  <span className="mr-2">✅</span>
+                  <span className="mr-2 text-green-600">✓</span>
                   Proof of Personhood certificate
                 </div>
                 <div className="flex items-center text-black dark:text-white">
-                  <span className="mr-2">✅</span>
+                  <span className="mr-2 text-green-600">✓</span>
                   Privacy-protected verification
                 </div>
               </div>
@@ -312,7 +312,7 @@ const KYCVerificationFlow: React.FC<KYCVerificationFlowProps> = ({
                   Starting FREE Verification...
                 </span>
               ) : (
-                '🚀 Start FREE Verification'
+                'START FREE Verification'
               )}
             </motion.button>
 
@@ -330,8 +330,8 @@ const KYCVerificationFlow: React.FC<KYCVerificationFlowProps> = ({
 
             {/* Trust Indicators */}
             <div className="mt-8 text-xs text-gray-500 dark:text-gray-400 space-y-1">
-              <p>🔒 GDPR compliant • 🌍 220+ countries • 🆓 Always free</p>
-              <p>✨ Powered by Didit.me • 💚 Zero-knowledge privacy</p>
+              <p>SECURE: GDPR compliant • GLOBAL: 220+ countries • FREE: Always free</p>
+              <p>POWERED: Didit.me • PRIVATE: Zero-knowledge privacy</p>
             </div>
           </motion.div>
         )}
@@ -368,7 +368,7 @@ const KYCVerificationFlow: React.FC<KYCVerificationFlowProps> = ({
             className="text-center py-8"
           >
             <div className="w-16 h-16 bg-green-100 dark:bg-green-900/50 rounded-full mx-auto mb-4 flex items-center justify-center">
-              <span className="text-2xl">🎯</span>
+              <span className="text-2xl font-bold text-green-600">ACTIVE</span>
             </div>
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
               Verification Window Opened!
@@ -383,7 +383,7 @@ const KYCVerificationFlow: React.FC<KYCVerificationFlowProps> = ({
                 whileHover={{ scale: 1.02 }}
                 className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 text-sm font-medium"
               >
-                <span className="mr-1">🔗</span>
+                <span className="mr-1 text-blue-600">LINK:</span>
                 Reopen verification window
               </motion.button>
             )}
@@ -399,7 +399,7 @@ const KYCVerificationFlow: React.FC<KYCVerificationFlowProps> = ({
             className="text-center py-8"
           >
             <div className="w-16 h-16 bg-orange-100 dark:bg-orange-900/50 rounded-full mx-auto mb-4 flex items-center justify-center">
-              <span className="text-2xl">🚨</span>
+              <span className="text-2xl font-bold text-orange-600">BLOCKED</span>
             </div>
             <h3 className="text-lg font-semibold text-orange-600 dark:text-orange-400 mb-2">
               Please Allow Popups
@@ -416,7 +416,7 @@ const KYCVerificationFlow: React.FC<KYCVerificationFlowProps> = ({
                   whileTap={{ scale: 0.98 }}
                   className="w-full bg-gradient-to-r from-green-500 to-blue-500 text-white font-semibold py-4 px-6 rounded-xl hover:from-green-600 hover:to-blue-600 transition-all duration-200 flex items-center justify-center space-x-2"
                 >
-                  <span>🚀</span>
+                  <span className="font-bold">START</span>
                   <span>Open FREE Verification</span>
                 </motion.button>
 
@@ -461,14 +461,14 @@ const KYCVerificationFlow: React.FC<KYCVerificationFlowProps> = ({
               </svg>
             </div>
             <h3 className="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-4">
-              🎉 Verification Complete!
+              SUCCESS: Verification Complete!
             </h3>
             <p className="text-black dark:text-white mb-4">
               You've successfully completed identity verification and earned <strong>100 free ID tokens</strong>!
             </p>
             <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4 border border-green-200 dark:border-green-700">
               <p className="text-gray-800 dark:text-gray-200 text-sm">
-                ✨ You're now eligible for 100 free tokens every month!
+                BONUS: You're now eligible for 100 free tokens every month!
               </p>
             </div>
           </motion.div>
@@ -483,7 +483,7 @@ const KYCVerificationFlow: React.FC<KYCVerificationFlowProps> = ({
             className="text-center py-8"
           >
             <div className="w-16 h-16 bg-red-100 dark:bg-red-900/50 rounded-full mx-auto mb-4 flex items-center justify-center">
-              <span className="text-2xl">⚠️</span>
+              <span className="text-2xl font-bold text-red-600">ERROR</span>
             </div>
             <h3 className="text-lg font-semibold text-red-600 dark:text-red-400 mb-2">
               DIDIT Verification Unavailable
@@ -493,7 +493,7 @@ const KYCVerificationFlow: React.FC<KYCVerificationFlowProps> = ({
             </p>
             <div className="bg-orange-50 dark:bg-orange-900/20 rounded-lg p-3 mb-6 border border-orange-200 dark:border-orange-700">
               <p className="text-sm text-gray-600 dark:text-gray-300">
-                💡 <strong>No problem!</strong> You can still verify your identity and get 100 free ID tokens using our secure wallet verification.
+                NOTE: <strong>No problem!</strong> You can still verify your identity and get 100 free ID tokens using our secure wallet verification.
               </p>
             </div>
             
@@ -503,7 +503,7 @@ const KYCVerificationFlow: React.FC<KYCVerificationFlowProps> = ({
                 whileHover={{ scale: 1.02 }}
                 className="w-full bg-blue-500 text-white font-medium py-3 px-4 rounded-lg hover:bg-blue-600 transition-colors"
               >
-                🔄 Try DIDIT Again
+                RETRY: Try DIDIT Again
               </motion.button>
 
               <motion.button
@@ -511,7 +511,7 @@ const KYCVerificationFlow: React.FC<KYCVerificationFlowProps> = ({
                 whileHover={{ scale: 1.02 }}
                 className="w-full bg-gradient-to-r from-green-500 to-blue-500 text-white font-semibold py-3 px-4 rounded-lg hover:from-green-600 hover:to-blue-600 transition-all duration-200"
               >
-                ✅ Use Basic Wallet Verification (Still get 100 tokens!)
+                ALT: Use Basic Wallet Verification (Still get 100 tokens!)
               </motion.button>
               
               {onVerificationSkip && (

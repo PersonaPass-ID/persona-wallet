@@ -1,5 +1,5 @@
 /**
- * 🏛️ DIDIT VC Generator Service
+ * DIDIT VC Generator Service
  * Creates multiple purpose-bound Verifiable Credentials from DIDIT KYC results
  * Implements the Web3 Universal Passport architecture
  */
@@ -77,13 +77,13 @@ export class DiditVCGeneratorService {
     const types: string[] = []
 
     try {
-      console.log('🏛️ Generating VCs from DIDIT KYC result...')
+      console.log('GENERATING: VCs from DIDIT KYC result...')
       
       // Get or create DID for the wallet
       let did = await realIdentityStorage.getDIDByWallet(walletAddress)
       
       if (!did) {
-        console.log('📝 Creating new DID for wallet:', walletAddress)
+        console.log('CREATING: New DID for wallet:', walletAddress)
         did = await this.createDIDForWallet(walletAddress, walletType, kycResult)
         if (!did) {
           throw new Error('Failed to create DID for wallet')
@@ -94,7 +94,7 @@ export class DiditVCGeneratorService {
       const timestamp = new Date().toISOString()
       const issuer = 'did:persona:issuer:didit-kyc'
 
-      // 1. 🆔 Proof of Personhood VC (Always issued)
+      // 1. ID: Proof of Personhood VC (Always issued)
       const personhoodVC = this.createProofOfPersonhoodVC(
         did, 
         walletAddress, 
@@ -105,7 +105,7 @@ export class DiditVCGeneratorService {
       credentials.push(personhoodVC)
       types.push('ProofOfPersonhood')
 
-      // 2. 🎂 Age Verification VC (if age data available)
+      // 2. AGE: Age Verification VC (if age data available)
       if (verificationData.date_of_birth || verificationData.age) {
         const ageVC = this.createAgeVerificationVC(
           did,
@@ -118,7 +118,7 @@ export class DiditVCGeneratorService {
         types.push('AgeVerification')
       }
 
-      // 3. 🌍 Jurisdiction/Residency VC (if location data available)
+      // 3. GEO: Jurisdiction/Residency VC (if location data available)
       if (verificationData.country_of_residence || verificationData.nationality) {
         const jurisdictionVC = this.createJurisdictionVC(
           did,
@@ -131,7 +131,7 @@ export class DiditVCGeneratorService {
         types.push('JurisdictionProof')
       }
 
-      // 4. 💼 Accredited Investor VC (if applicable based on jurisdiction/verification level)
+      // 4. INVEST: Accredited Investor VC (if applicable based on jurisdiction/verification level)
       if (this.isAccreditedInvestorEligible(verificationData)) {
         const investorVC = this.createAccreditedInvestorVC(
           did,
@@ -144,7 +144,7 @@ export class DiditVCGeneratorService {
         types.push('AccreditedInvestor')
       }
 
-      // 5. 🛡️ AML/Compliance VC (if compliance checks passed)
+      // 5. COMPLIANCE: AML/Compliance VC (if compliance checks passed)
       if (verificationData.aml_status || verificationData.sanctions_status) {
         const complianceVC = this.createComplianceVC(
           did,
@@ -157,7 +157,7 @@ export class DiditVCGeneratorService {
         types.push('ComplianceClearance')
       }
 
-      // 6. 📛 Real-world Name Binding VC (optional, if user consented)
+      // 6. NAME: Real-world Name Binding VC (optional, if user consented)
       if (verificationData.first_name && verificationData.last_name) {
         const nameVC = this.createNameBindingVC(
           did,
@@ -170,7 +170,7 @@ export class DiditVCGeneratorService {
         types.push('NameBinding')
       }
 
-      // 7. 🔐 Anti-Sybil VC (for preventing multiple accounts)
+      // 7. SYBIL: Anti-Sybil VC (for preventing multiple accounts)
       const antiSybilVC = this.createAntiSybilVC(
         did,
         walletAddress,
@@ -183,7 +183,7 @@ export class DiditVCGeneratorService {
       types.push('AntiSybil')
 
       // Store all credentials
-      console.log(`💾 Storing ${credentials.length} VCs...`)
+      console.log(`STORING: ${credentials.length} VCs...`)
       for (const credential of credentials) {
         const result = await this.storeCredential(credential, walletAddress, walletType)
         if (!result.success) {
@@ -191,7 +191,7 @@ export class DiditVCGeneratorService {
         }
       }
 
-      console.log(`✅ Generated ${credentials.length} VCs from DIDIT KYC`)
+      console.log(`SUCCESS: Generated ${credentials.length} VCs from DIDIT KYC`)
 
       return {
         success: true,
@@ -206,7 +206,7 @@ export class DiditVCGeneratorService {
       }
 
     } catch (error) {
-      console.error('❌ VC generation failed:', error)
+      console.error('ERROR: VC generation failed:', error)
       return {
         success: false,
         credentials: [],
