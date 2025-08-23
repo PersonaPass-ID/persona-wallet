@@ -199,7 +199,7 @@ function createStore(): RateLimitStore {
   if (env.REDIS_URL && env.NODE_ENV === 'production') {
     try {
       // Dynamic import for Redis (optional dependency)
-      const Redis = require('ioredis')
+      const Redis = eval('require')('ioredis')
       const redis = new Redis(env.REDIS_URL, {
         retryDelayOnFailover: 100,
         maxRetriesPerRequest: 3,

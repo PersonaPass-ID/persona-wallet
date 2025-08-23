@@ -189,13 +189,13 @@ class PersonaApiClient {
   private baseUrl: string
 
   constructor() {
-    // Force HTTPS URL to prevent mixed content errors
-    let apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://cabf8jj5t4.execute-api.us-east-1.amazonaws.com/prod'
+    // Connect to local backend API server (PersonaPass Backend Services)
+    let apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3002'
     
-    // Override any HTTP URLs with HTTPS version (use API Gateway with valid SSL)
-    if (apiUrl.startsWith('http://161.35.2.88:3001')) {
-      apiUrl = 'https://cabf8jj5t4.execute-api.us-east-1.amazonaws.com/prod'
-      console.warn('🔒 Overriding HTTP API URL with HTTPS API Gateway to prevent mixed content errors')
+    // For development, use local backend server
+    if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+      apiUrl = 'http://localhost:3002'
+      console.log('🔗 Using local PersonaPass Backend API server')
     }
     
     // Remove trailing /api if present to prevent double /api/api/ paths
